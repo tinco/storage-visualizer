@@ -1,0 +1,22 @@
+{
+  "name": "storage-visualization",
+  "version": "0.0.1",
+  "description": "A tool for visualizing storage space usage.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "Tinco Andringa",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "beta"
+  },
+  "dependencies": {
+    "diskspace": "^2.0.0",
+    "diskusage": "^0.2.4",
+    "drivelist": "^6.1.7",
+    "gluonjs": "^2.2.0",
+    "prettysize": "^1.1.0"
+  }
+}
