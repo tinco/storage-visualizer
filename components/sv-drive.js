@@ -28,7 +28,6 @@ class SvDrive extends GluonElement {
   }
 
   driveSelected(device) {
-    console.log("Clicked: " + device);
     this.dispatchEvent(new CustomEvent("navigate", { composed: true, bubbles: true, detail: { action: "viewDrive", params: { device: device }}}))
   }
 

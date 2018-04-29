@@ -1,5 +1,7 @@
 const { GluonElement, html } = require('gluonjs/gluon.umd')
 require('./components/sv-drivelist.js') // WHY ./components??
+require('./components/sv-view-drive.js') // WHY ./components??
+
 
 class AppElement extends GluonElement {
   get template() {
@@ -13,11 +15,25 @@ class AppElement extends GluonElement {
           display: block;
         }
       </style>
+      <button on-click=${ (e) => this.navigate("listDrives") }>Back</button>
       <div id="views">
         <sv-drivelist id="listDrives" class="active"></sv-drivelist>
-        <div id="viewDrive"><h1>OMG viewDrive view</h1></div>
+        <sv-view-drive id="viewDrive"><sv-view-drive>
       </div>
     `
+  }
+
+  navigate(target, params) {
+    this.dispatchEvent(
+      new CustomEvent("navigate", {
+        composed: true,
+        bubbles: true,
+        detail: {
+          action: target,
+          params: params
+        }
+      }
+    ));
   }
 
   connectedCallback() {
@@ -35,8 +51,9 @@ class AppElement extends GluonElement {
     Array.from(this.$.views.children).forEach( e => e.classList.remove('active'));
 
     const target = this.$[action];
-    Object.entries(params).forEach( (p) => target.setAttribute(p[0], p[1]) );
+    Object.entries(params || {}).forEach( (p) => target.setAttribute(p[0], p[1]) );
     target.classList.add("active");
+    target.onLoad()
   }
 }
 

@@ -20,6 +20,10 @@ class SvDrivelist extends GluonElement {
     }
   }
 
+  onLoad() {
+    this.render()
+  }
+
   connectedCallback() {
     super.connectedCallback()
     Drives.list().then(this.updateDrives.bind(this))
