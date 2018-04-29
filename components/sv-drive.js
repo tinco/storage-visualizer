@@ -8,7 +8,7 @@ class SvDrive extends GluonElement {
     if (device) {
       const drive = Drives.getDrive(device);
       return html`
-        <div>
+        <div on-click=${ (e) => this.driveSelected(device) }>
           <h3>Drive: ${drive.device} mounted on ${drive.mountpoint.path}</h3>
           <dl>
             <dt>Disk space total:</dt>
@@ -25,6 +25,11 @@ class SvDrive extends GluonElement {
     } else {
       return html`<div>Loading..</div>`
     }
+  }
+
+  driveSelected(device) {
+    console.log("Clicked: " + device);
+    this.dispatchEvent(new CustomEvent("navigate", { composed: true, bubbles: true, detail: { action: "viewDrive", params: { device: device }}}))
   }
 
   connectedCallback() {
