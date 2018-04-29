@@ -3,7 +3,17 @@ const Drives = require('../lib/drives.js')
 
 class SvViewDrive extends GluonElement {
   get template() {
-    return html`<h1>View Drive ${this.getAttribute('device')}</h1>`
+    const device = this.getAttribute('device');
+    const drive = Drives.getDrive(device);
+    if (drive) {
+      return html`
+        <h1>View Drive ${device}</h1>
+      `
+    } else {
+      return html`
+        <h1>View Drive</h1>
+      `
+    }
   }
 
   connectedCallback() {
