@@ -18,3 +18,27 @@ describe("_getDirectoryStats", () => {
     });
   });
 });
+
+describe("_updateResults", () => {
+  const updateResults = sizes._updateResults;
+
+  // inserts a file info object into the results tree as described above
+  // function updateResults(results, info) {
+  it("inserts an info object into the results tree", () => {
+    const results = {
+      directories: {},
+      files: {}
+    }
+
+    let info = {
+      path: "/a/b/c",
+      size: 1234,
+      isDirectory: () => false
+    }
+
+    updateResults(results, info);
+    expect(Object.keys(results)).toEqual(["directories", "files"]);
+    expect(Object.keys(results.directories)).toEqual(["a"]);
+    expect(results.directories.a.directories.b.files.c).toEqual(info);
+  });
+})
